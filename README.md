@@ -48,6 +48,6 @@ A la hora de elegir un broker podemos elegir entre instalar el nuestro propio en
 
 ### Mosquitto
 [Mosquitto](http://mosquitto.org/) es un broker open source que se puede instalar localmente en un PC/Rpi/BBB. 
-Existe un servidor de test en [test.mosquitto.org](test.mosquitto.org) al que todo el mundo tiene
+Existe un servidor de test en [test.mosquitto.org](http://test.mosquitto.org/) al que todo el mundo tiene
 acceso para realizar pruebas de MQTT
 también existe una versión online pública 
