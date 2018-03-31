@@ -87,9 +87,97 @@ que ejecutamos un _publish_ con un valor diferente.
 
 ### Install MQTT for Arduino IDE
 Installing PubSubClient for the Arduino IDE is easy. Either install manually from GitHub or use the Arduino Package Installer. Simple!
+![PubsubInstall](https://github.com/pensactius/iot_info/blob/master/assets/PubSubLibrary_Install.PNG)
 
+### Code Example for Arduino MQTT
+__Atención__: El siguiente código no pertenece a PensActius, es una copia exacta de https://www.baldengineer.com/mqtt-tutorial.html. Únicamente se ha modificado para que encienda el _LED_BUILTIN_ que es el LED azul de la Wemos D1.
+
+The following code connects to WiFi and subscribes to the topic _ledStatus_. When the ESP8266 receives a message, it acts by turning the “ledPin” on or off.
+
+```C++
+#include <ESP8266WiFi.h>
+#include <PubSubClient.h>
+ 
+// Connect to the WiFi
+const char* ssid = "miSSID";        // Poner aquí la SSID de la WiFi
+const char* password = "miPasswd";  // Poner aquí el passwd de la WiFi
+const char* mqtt_server = "test.mosquitto.org";
+ 
+WiFiClient espClient;
+PubSubClient client(espClient);
+ 
+void callback(char* topic, byte* payload, unsigned int length) {
+ Serial.print("Message arrived [");
+ Serial.print(topic);
+ Serial.print("] ");
+ for (int i=0;i<length;i++) {
+  char receivedChar = (char)payload[i];
+  Serial.print(receivedChar);
+  if (receivedChar == '0')
+  // ESP8266 Huzzah outputs are "reversed"
+  digitalWrite(LED_BUILTIN, HIGH);
+  if (receivedChar == '1')
+   digitalWrite(LED_BUILTIN, LOW);
+  }
+  Serial.println();
+}
+ 
+ 
+void reconnect() {
+ // Loop until we're reconnected
+ while (!client.connected()) {
+ Serial.print("Attempting MQTT connection...");
+ // Attempt to connect
+ if (client.connect("ESP8266 Client")) {
+  Serial.println("connected");
+  // ... and subscribe to topic
+  client.subscribe("ledStatus");
+ } else {
+  Serial.print("failed, rc=");
+  Serial.print(client.state());
+  Serial.println(" try again in 5 seconds");
+  // Wait 5 seconds before retrying
+  delay(5000);
+  }
+ }
+}
+ 
+void setup()
+{
+ Serial.begin(9600);
+ 
+ client.setServer(mqtt_server, 1883);
+ client.setCallback(callback);
+ 
+ pinMode(LED_BUILTIN, OUTPUT);
+}
+ 
+void loop()
+{
+ if (!client.connected()) {
+  reconnect();
+ }
+ client.loop();
+}
+```
+Podemos usar el código anterior en python para encender y apagar el LED
+```python
+import paho.mqtt.publish as publish
+import time
+print("Sending 0...")
+publish.single("ledStatus", "0", hostname="test.mosquitto.org")
+time.sleep(1)
+print("Sending 1...")
+publish.single("ledStatus", "1", hostname="test.mosquitto.org")
+```
+
+El siguiente paso lógico sería tener una interfaz gráfica que permita controlar y monitorizar los dispositivos
+conectados, i.e: un botón para encender el LED, un gráfico de temperatura a lo largo del tiempo, etc. Ese es
+el tema de la siguiente sección.
 
 
 ## esp8266 con MicroPython
 https://www.home-assistant.io/blog/2016/08/31/esp8266-and-micropython-part2/
 
+### Brokers
+iot.eclipse.org:443
