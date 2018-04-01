@@ -4,4 +4,4 @@ La mayor parte de la información contenida en este documento está extraída de
 otros tutoriales de Internet. Se menciona la URL original de dónde se ha extraído
 la información.
 
-Puedes ver los diferentes capítulos en la [Wiki](wiki)
+Puedes ver los diferentes capítulos en la [Wiki](../../wiki)
