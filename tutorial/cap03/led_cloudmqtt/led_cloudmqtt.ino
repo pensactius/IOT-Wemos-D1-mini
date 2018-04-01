@@ -4,7 +4,7 @@
 // Connect to the WiFi
 const char* ssid = "WiFi_SSID";         // Poner aquí el nombre de la WiFi
 const char* password = "WiFi_Password"; // Poner aquí el password de la WiFi
-const char* mqtt_server = "m23.cloudmqtt.com";
+const char* mqtt_server = "m23.cloudmqtt.com"; // Servidor de la instancia CloudMQTT
  
 WiFiClient espClient;
 PubSubClient client(espClient);
@@ -33,7 +33,7 @@ void reconnect() {
  // Loop until we're reconnected
  while (!client.connected()) {
  Serial.print("Attempting MQTT connection...");
- // Attempt to connect
+ // Attempt to connect,               <<Usuario>> << Password >>
  if (client.connect("ESP8266 Client", "bowmxsdl", "DYbXI6WWOwMe")) {
   Serial.println("connected");
   // ... and subscribe to topic
