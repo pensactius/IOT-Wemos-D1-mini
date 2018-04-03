@@ -1,8 +1,8 @@
 // Incluímos la librería
 #include <DHT.h>
 
-// Definimos el pin digital donde se conecta el sensor
-const int DHTPIN = 13;
+// Definimos el pin digital donde se conecta el sensor (D7 = Arduino 13)
+const int DHTPIN = 13;  // D7 en la Wemos D1
 
 // Tipo de sensor
 const int DHTTYPE = DHT11;
