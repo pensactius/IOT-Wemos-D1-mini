@@ -87,21 +87,4 @@ void loop()
   reconnect();
  }
  client.loop();
- 
-  long now = millis();
-  
-  if (now - lastMsg > 2000) {
-    lastMsg = now;
-    temp = map (analogRead (A0), 0, 1023, 0, 40);
-
-    /*
-    char buf[20]; String pubString;
-    pubString = String (temp);
-    pubString.toCharArray (buf, pubString.length()+1);
-    Serial.println(buf);
-    Serial.println (temp);    
-    client.publish ("temp", buf);
-    */
-    client.publish ("temp", String (temp).c_str());
-  }
 }
