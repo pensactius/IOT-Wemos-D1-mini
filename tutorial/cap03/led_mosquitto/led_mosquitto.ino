@@ -10,17 +10,17 @@ WiFiClient espClient;
 PubSubClient client(espClient);
  
 void callback(char* topic, byte* payload, unsigned int length) {
- Serial.print("Message arrived [");
- Serial.print(topic);
- Serial.print("] ");
- for (int i=0;i<length;i++) {
-  char receivedChar = (char)payload[i];
-  Serial.print(receivedChar);
-  if (receivedChar == '0')
-  // ESP8266 Huzzah outputs are "reversed"
-  digitalWrite(LED_BUILTIN, HIGH);
-  if (receivedChar == '1')
-   digitalWrite(LED_BUILTIN, LOW);
+  Serial.print("Message arrived [");
+  Serial.print(topic);
+  Serial.print("] ");
+  for (int i=0;i<length;i++) {
+    char receivedChar = (char)payload[i];
+    Serial.print(receivedChar);
+    if (receivedChar == '0')
+    // ESP8266 Huzzah outputs are "reversed"
+    digitalWrite(LED_BUILTIN, HIGH);
+    if (receivedChar == '1')
+      digitalWrite(LED_BUILTIN, LOW);
   }
   Serial.println();
 }
@@ -28,21 +28,21 @@ void callback(char* topic, byte* payload, unsigned int length) {
  
 void reconnect() {
  // Loop until we're reconnected
- while (!client.connected()) {
- Serial.print("Attempting MQTT connection...");
- // Attempt to connect
- if (client.connect("ESP8266 Client")) {
-  Serial.println("connected");
-  // ... and subscribe to topic
-  client.subscribe("ledStatus");
- } else {
-  Serial.print("failed, rc=");
-  Serial.print(client.state());
-  Serial.println(" try again in 5 seconds");
-  // Wait 5 seconds before retrying
-  delay(5000);
+  while (!client.connected()) {
+    Serial.print("Attempting MQTT connection...");
+    // Attempt to connect
+    if (client.connect("ESP8266 Client")) {
+      Serial.println("connected");
+      // ... and subscribe to topic
+      client.subscribe("ledStatus");
+    } else {
+      Serial.print("failed, rc=");
+      Serial.print(client.state());
+      Serial.println(" try again in 5 seconds");
+      // Wait 5 seconds before retrying
+      delay(5000);
+    }
   }
- }
 }
  
 void setup()
