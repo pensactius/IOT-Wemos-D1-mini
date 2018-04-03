@@ -12,8 +12,8 @@ const int DHTTYPE = DHT11;
 DHT dht (DHTPIN, DHTTYPE);
 
 // Connect to the WiFi
-const char* ssid = "Fibracat_04556";         // Poner aquí el nombre de la WiFi
-const char* password = "31fe79ca1a"; // Poner aquí el password de la WiFi
+const char* ssid = "........";         // Poner aquí el nombre de la WiFi
+const char* password = "............"; // Poner aquí el password de la WiFi
 const char* mqtt_server = "test.mosquitto.org"; // Servidor Mosquitto
 
 WiFiClient espClient;           // variable para conectar a la WiFi
