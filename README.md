@@ -1,4 +1,4 @@
-# IOT con Wemos D1
+# IOT con la Wemos D1 mini
 Recopilatorio de apuntes básicos sobre IOT y su aplicación con la placa Wemos D1. 
 La mayor parte de la información contenida en este documento está extraída de
 otros tutoriales de Internet. Se menciona la URL original de dónde se ha extraído
