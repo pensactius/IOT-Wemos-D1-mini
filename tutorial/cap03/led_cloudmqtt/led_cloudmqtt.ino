@@ -54,7 +54,7 @@ void setup()
  
  setup_wifi();
  
- client.setServer(mqtt_server, 14785);
+ client.setServer(mqtt_server, 13013);
  client.setCallback(callback);
  
  pinMode(LED_BUILTIN, OUTPUT);
